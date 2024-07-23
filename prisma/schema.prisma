@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["omitApi"]
 }
 
 datasource db {
@@ -36,7 +37,9 @@ model users {
   email        String  @db.NVarChar(255) @unique
   password     String  @db.NVarChar(255)
   isAdmin      Boolean @default(false)
+  //relations
   carts        carts[]
+  adress       adresses[]
 }
 
 model carts {
@@ -50,4 +53,11 @@ model carts {
   user       users    @relation(fields: [userId], references: [userId], onDelete: Cascade)
 
   @@unique([productId, userId])
+}
+
+model adresses {
+  adressId Int      @id @default(autoincrement())
+  userId Int
+  //relations
+  user users @relation(fields: [userId], references: [userId])
 }
