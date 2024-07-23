@@ -8,13 +8,15 @@ app.use(express.json())
 
 
 
+import authMiddleware from './auth/auth-middleware';
 import authRoute from './auth/auth-route'
 import meRoute from './auth/me-route'
-import authMiddleware from './auth/auth-middleware';
+import userRoute from './user/user-route'
 
 
 app.use(authRoute)
-app.use(authMiddleware, meRoute)
+app.use( meRoute)
+app.use(userRoute)
 
 app.listen(process.env.PORT, () => {
 	console.log(`Servidor ON port ${process.env.PORT} 🚀`)
