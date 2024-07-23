@@ -12,3 +12,42 @@ datasource db {
   provider = "sqlserver"
   url      = env("DATABASE_URL")
 }
+
+model products {
+  productId   Int        @id @default(autoincrement())
+  productName String     @db.NVarChar(255)
+  stockQty    Int
+  categoryId  Int
+  //relation
+  categories  categories @relation(fields: [categoryId], references: [categoryId])
+  carts       carts[]
+}
+
+model categories {
+  categoryId   Int        @id @default(autoincrement())
+  categoryName String     @db.NVarChar(255)
+  //relations
+  product      products[]
+}
+
+model users {
+  userId       Int     @id @default(autoincrement())
+  userFullName String  @db.NVarChar(255)
+  email        String  @db.NVarChar(255) @unique
+  password     String  @db.NVarChar(255)
+  isAdmin      Boolean @default(false)
+  carts        carts[]
+}
+
+model carts {
+  cartId     Int      @id @default(autoincrement())
+  shopQty    Int
+  assignedAt DateTime @default(now())
+  productId  Int
+  userId     Int
+  //relations
+  product    products @relation(fields: [productId], references: [productId], onDelete: Cascade)
+  user       users    @relation(fields: [userId], references: [userId], onDelete: Cascade)
+
+  @@unique([productId, userId])
+}
