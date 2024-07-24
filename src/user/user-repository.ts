@@ -9,7 +9,7 @@ const getOneByEmail = async (Email: string) => {
 
 const getOne = async  (id:number) => {
     return await prisma.users.findUnique({
-        where: {userId: id},
+        where: {userId: Number(id)},
         omit: {
             password: true,
           },

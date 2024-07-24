@@ -8,15 +8,15 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) =>{
     }
 
     try {
-        jwt.verify(req.headers.authorization.replace('bearer ', ''), process.env.JWT_SECRET || "")
-
-
+        jwt.verify(req.headers.authorization.replace('bearer ', ''), process.env.JWT_SECRET || "!@#MySecret123")
+        
     }  catch (error: any) {
-        return res.status(403).send()
+        return res.status(403).send(error.message)
     }
 
     try {
-        const userId = jwt.verify(req.headers.authorization.replace('bearer ', ''), process.env.JWT_SECRET || "")
+        
+        const userId = jwt.verify(req.headers.authorization.replace('bearer ', ''), process.env.JWT_SECRET || '!@#MySecret123')
         
         if (!validateDevice(Number(userId), req.ip)) {
             return res.status(403).json({ message: "Token inválido ou expirado." });

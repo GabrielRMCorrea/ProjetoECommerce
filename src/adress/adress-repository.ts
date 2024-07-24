@@ -1,8 +1,12 @@
 import { adresses } from "@prisma/client";
 import prisma from '../prisma-client'
 
-const getAll = async  () => {
-    return await prisma.adresses.findMany()
+const getAll = async  (query : any) => {
+    const whereClause : any = {}
+    for (const i in query){
+        whereClause[i] = Number(query[i]) ///precisa ser do tipo do campo validado pelo prisma, como fazer isso?
+    }
+    return await prisma.adresses.findMany({where: whereClause})
 }
 
 const getOne = async (id: number) => {

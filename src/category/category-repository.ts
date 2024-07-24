@@ -7,8 +7,12 @@ const getOne = async  (id: number) => {
     })
 };
 
-const getAll = async () => {
-    return await prisma.categories.findMany()
+const getAll = async (query:any) => {
+    const whereClause : any = {}
+    for (const i in query){
+        whereClause[i] = Number(query[i]) ///precisa ser do tipo do campo validado pelo prisma, como fazer isso?
+    }
+    return await prisma.categories.findMany({where:whereClause})
 };
 
 const create = async (categoryData: categories) =>{

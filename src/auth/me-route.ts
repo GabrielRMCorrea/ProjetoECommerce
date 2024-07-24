@@ -6,9 +6,9 @@ import { Router } from "express";
 
 const router = Router()
 
-router.get('/me', async (req : Request,res : Response) =>{
+router.get('/', async (req : Request,res : Response) =>{
     try {
-        const user = userRepository.getOne(res.locals.userId)
+        const user = await userRepository.getOne(res.locals.userId)
         return res.json(user)
     } catch {
       return res.status(500).send()

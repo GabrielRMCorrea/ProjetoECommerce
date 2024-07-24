@@ -17,7 +17,7 @@ export const validateDevice = async (id:number, ip : string | undefined) => {
   return LoginDevices[id] === ip  
 }
 
-router.post('/login',async (req: Request, res: Response)=>{
+router.post('/',async (req: Request, res: Response)=>{
     
     try{
 
@@ -40,8 +40,8 @@ router.post('/login',async (req: Request, res: Response)=>{
             return res.status(401).send( "Invalid Password" );
           }, 5000);
           }
-
-        const token = jwt.sign(user.userId.toString(), process.env.JWTSECRET || '', {expiresIn: "8h"})
+          
+        const token = jwt.sign(user.userId.toString(), process.env.JWT_SECRET || '!@#MySecret123')
 
         if (req.ip){
             LoginDevices[user.userId] = req.ip
@@ -53,8 +53,8 @@ router.post('/login',async (req: Request, res: Response)=>{
         return res.json(token)
         
 
-    } catch (error) {
-        res.status(500).send('Internal server error')
+    } catch (error :any) {
+        res.status(500).send(error.message)
     }
 })
 

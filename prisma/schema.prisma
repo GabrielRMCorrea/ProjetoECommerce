@@ -58,6 +58,7 @@ model carts {
 model adresses {
   adressId Int      @id @default(autoincrement())
   userId Int
+  adress String @db.NVarChar(255)
   //relations
   user users @relation(fields: [userId], references: [userId])
 }
