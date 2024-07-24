@@ -60,6 +60,10 @@ ALTER TABLE [dbo].[carts] ADD CONSTRAINT [carts_userId_fkey] FOREIGN KEY ([userI
 -- AddForeignKey
 ALTER TABLE [dbo].[adresses] ADD CONSTRAINT [adresses_userId_fkey] FOREIGN KEY ([userId]) REFERENCES [dbo].[users]([userId]) ON DELETE NO ACTION ON UPDATE CASCADE;
 
+
+INSERT [dbo].[users] ([userFullName], [email], [password], [isAdmin]) VALUES ( N'Admin', N'admin@admin.com', N'$2b$10$nwTbsFo1Nun/nGv7p2297.ZcskH4Nbbo8apLJjGlXQbJ/4at9fCSu', 1);
+
+
 COMMIT TRAN;
 
 END TRY
