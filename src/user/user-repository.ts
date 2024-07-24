@@ -13,6 +13,9 @@ const getOne = async  (id:number) => {
         omit: {
             password: true,
           },
+        include:{
+            adress: true
+        }
     })
 };
 
@@ -21,6 +24,9 @@ const getAll = async () => {
         omit: {
             password: true,
           },
+        include:{
+            adress: true
+        }
     })
 };
 

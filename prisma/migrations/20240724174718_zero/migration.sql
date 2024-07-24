@@ -44,6 +44,7 @@ CREATE TABLE [dbo].[carts] (
 CREATE TABLE [dbo].[adresses] (
     [adressId] INT NOT NULL IDENTITY(1,1),
     [userId] INT NOT NULL,
+    [adress] NVARCHAR(255) NOT NULL,
     CONSTRAINT [adresses_pkey] PRIMARY KEY CLUSTERED ([adressId])
 );
 

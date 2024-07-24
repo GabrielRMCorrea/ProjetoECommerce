@@ -13,12 +13,19 @@ import authRoute from './auth/auth-route'
 import meRoute from './auth/me-route'
 import userRoute from './user/user-route'
 import adressRoute from "./adress/adress-route"
+import cartRoute from "./cart/cart-route"
+import categoryRoute from "./category/category-route"
+import productRoute from "./product/product-route"
 
 
 app.use('/authenticate',authRoute)
 app.use('/me', authMiddleware,meRoute)
 app.use('/user',authMiddleware,userRoute)
 app.use('/adress', authMiddleware, adressRoute)
+app.use('/cart', authMiddleware, cartRoute)
+app.use('/category', authMiddleware,categoryRoute)
+app.use('/product', authMiddleware, productRoute)
+
 
 app.listen(process.env.PORT, () => {
 	console.log(`Servidor ON port ${process.env.PORT} 🚀`)

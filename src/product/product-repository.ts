@@ -5,7 +5,8 @@ import prisma from '../prisma-client';
 
 const getOne = async  (id: number) => {
     return await prisma.products.findUnique({
-        where: {productId : id}
+        where: {productId : id},
+        include: {categories : true}
     })
 };
 
@@ -14,7 +15,10 @@ const getAll = async (query : any) => {
     for (const i in query){
         whereClause[i] = Number(query[i]) ///precisa ser do tipo do campo validado pelo prisma, como fazer isso?
     }
-    return await prisma.products.findMany({where: whereClause})
+    return await prisma.products.findMany({
+        where: whereClause,
+        include: {categories : true}
+    })
 };
 
 const create = async (productData : products) =>{

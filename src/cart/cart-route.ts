@@ -1,6 +1,7 @@
 import { Router, Request, Response } from "express"
-import { Prisma } from "@prisma/client"
+import { Prisma, products } from "@prisma/client"
 import cartRepository from "./cart-repository"
+import productRepository from "../product/product-repository"
 
 
 const router = Router()
@@ -28,6 +29,13 @@ router.get('/:id',async (req : Request, res : Response)=>{
 
 router.post('/', async  (req : Request, res : Response)=>{
     try {
+        const product: products |null =  await productRepository.getOne(req.body.productId)
+        if (!product){
+           return res.status(400).send('Product not found.') 
+        }
+        if (req.body.shopQty > product.stockQty){
+            return res.status(400).send('Invalid quantity') 
+        }
 
         const newData = await cartRepository.create(req.body)
         res.status(201).json(newData)
