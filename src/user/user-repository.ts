@@ -14,7 +14,7 @@ const getOne = async  (id:number) => {
             password: true,
           },
         include:{
-            adress: true
+            address: true
         }
     })
 };
@@ -25,7 +25,7 @@ const getAll = async () => {
             password: true,
           },
         include:{
-            adress: true
+            address: true
         }
     })
 };

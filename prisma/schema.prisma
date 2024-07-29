@@ -39,7 +39,7 @@ model users {
   isAdmin      Boolean @default(false)
   //relations
   carts        carts[]
-  adress       adresses[]
+  address       addresses[]
 }
 
 model carts {
@@ -55,10 +55,10 @@ model carts {
   @@unique([productId, userId])
 }
 
-model adresses {
-  adressId Int      @id @default(autoincrement())
+model addresses {
+  addressId Int      @id @default(autoincrement())
   userId Int
-  adress String @db.NVarChar(255)
+  address String @db.NVarChar(255)
   //relations
   user users @relation(fields: [userId], references: [userId])
 }

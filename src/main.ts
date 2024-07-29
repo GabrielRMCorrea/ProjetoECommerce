@@ -12,7 +12,7 @@ import authMiddleware from './auth/auth-middleware';
 import authRoute from './auth/auth-route'
 import meRoute from './auth/me-route'
 import userRoute from './user/user-route'
-import adressRoute from "./adress/adress-route"
+import addressRoute from "./address/address-route"
 import cartRoute from "./cart/cart-route"
 import categoryRoute from "./category/category-route"
 import productRoute from "./product/product-route"
@@ -21,10 +21,10 @@ import productRoute from "./product/product-route"
 app.use('/authenticate',authRoute)
 app.use('/me', authMiddleware,meRoute)
 app.use('/user',authMiddleware,userRoute)
-app.use('/adress', authMiddleware, adressRoute)
+app.use('/adress', authMiddleware, addressRoute)
 app.use('/cart', authMiddleware, cartRoute)
-app.use('/category', authMiddleware,categoryRoute)
-app.use('/product', authMiddleware, productRoute)
+app.use('/category',categoryRoute)
+app.use('/product', productRoute)
 
 
 app.listen(process.env.PORT, () => {

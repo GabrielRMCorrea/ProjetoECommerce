@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express"
 import { Prisma } from "@prisma/client"
-import adressRepository from "./adress-repository"
+import addressRepository from "./address-repository"
 
 
 const router = Router()
@@ -8,7 +8,7 @@ const router = Router()
 
 router.get('/', async (req : Request, res : Response)=>{
     try{
-        const data = await adressRepository.getAll(req.query)
+        const data = await addressRepository.getAll(req.query)
         return res.json(data)
     } catch (error) {
         return res.status(500).send(error)
@@ -18,7 +18,7 @@ router.get('/', async (req : Request, res : Response)=>{
 router.get('/:id',async (req : Request, res : Response)=>{
     try{
         const id = Number(req.params.id)
-        const data = adressRepository.getOne(id)
+        const data = addressRepository.getOne(id)
         return res.json(data)
 
     } catch (error) {
@@ -29,7 +29,7 @@ router.get('/:id',async (req : Request, res : Response)=>{
 router.post('/', async  (req : Request, res : Response)=>{
     try {
 
-        const newData = await adressRepository.create(req.body)
+        const newData = await addressRepository.create(req.body)
         res.status(201).json(newData)
 
       } catch (error) {
@@ -44,7 +44,7 @@ router.post('/', async  (req : Request, res : Response)=>{
 router.put('/:id',async  (req : Request, res : Response)=>{
     try{
         const id = Number(req.params.id)
-        const updatedData = adressRepository.update(id, req.body)
+        const updatedData = addressRepository.update(id, req.body)
         return res.json(updatedData)
 
     } catch (error) {
@@ -59,7 +59,7 @@ router.put('/:id',async  (req : Request, res : Response)=>{
 router.delete('/:id', async  (req : Request, res : Response)=>{
     try{
         const id = Number(req.params.id)
-        const deletedData = adressRepository.destroy(id)
+        const deletedData = addressRepository.destroy(id)
         return res.json(deletedData)
 
     } catch (error) {
